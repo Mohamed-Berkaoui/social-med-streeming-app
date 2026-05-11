@@ -1,11 +1,11 @@
-import { DataTypes } from "sequelize";
-import { sequelize } from "../config/connectToDb.js";
-import User from "./user.model.js";
+const { DataTypes } = require("sequelize");
+const { sequelize } = require("../config/connectToDb.js");
+const User = require("./user.model.js");
 
 const UserSettings = sequelize.define(
   "User_Settings",
   {
-    userId: {
+    userid: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
@@ -14,11 +14,11 @@ const UserSettings = sequelize.define(
         key: "id",
       },
     },
-    profileVisibility: {
+    profilevisibility: {
       type: DataTypes.ENUM("public", "private", "friends"),
       defaultValue: "public",
     },
-    friendRequests: {
+    friendrequests: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
     },
@@ -28,9 +28,9 @@ const UserSettings = sequelize.define(
     },
   },
   {
-    tableName: "User_Settings",
+    tableName: "user_settings",
     timestamps: false,
   },
 );
 
-export default UserSettings;
+module.exports = UserSettings;

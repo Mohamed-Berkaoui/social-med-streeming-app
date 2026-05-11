@@ -1,8 +1,8 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../config/connectToDb.js");
-const { v4 } = require("uuid");
+//const { v4 } = require("uuid");
 //import { v4 as uuidv4 } from "uuid";
-const uuidv4 = v4;
+//const uuidv4 = v4;
 
 const User = sequelize.define(
   "User",
