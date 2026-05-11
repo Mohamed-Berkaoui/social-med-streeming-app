@@ -1,15 +1,15 @@
 const { Sequelize } = require("sequelize");
 const dotenv = require("dotenv");
+const logger = require("./logger");
 
 dotenv.config();
 
 // Sequelize Configuration
 const sequelize = new Sequelize(
-  "postgresql://neondb_owner:npg_oBPjptsWI02F@ep-noisy-hat-anxp36nv-pooler.c-6.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require",
-
+  process.env.DB_LINK,
   {
-    dialect: "postgres",
-    protocol: "postgres",
+    dialect: process.env.DB_DIALECT,
+    protocol: process.env.DB_DIALECT,
     logging: false,
     dialectOptions: {
       ssl: {
@@ -24,9 +24,14 @@ const sequelize = new Sequelize(
 const connectDB = async () => {
   try {
     await sequelize.authenticate();
-    console.log("Connected to db");
+    logger.info("Connected to database successfully");
   } catch (error) {
-    console.error("Failed to connect to db", error);
+    //console.error("Failed to connect to db", error);
+    logger.error({
+      message: "Failed to connect to database",
+      error: error.message,
+      stack: error.stack,
+    });
   }
 };
 
