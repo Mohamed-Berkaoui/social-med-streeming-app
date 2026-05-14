@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model friend {
+  user_id    Int     
+  friend_id  Int
+  created_at String 
+
+  @@id([user_id, friend_id])
+}
+
+model friend_request {
+  user_id    Int     
+  receiver_id  Int
+  status  String @default("pending")
+  created_at String 
+
+  @@id([user_id, receiver_id])
+}
